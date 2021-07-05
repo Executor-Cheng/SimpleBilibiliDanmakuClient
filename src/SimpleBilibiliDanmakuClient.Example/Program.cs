@@ -12,7 +12,7 @@ namespace SimpleBilibiliDanmakuClient.Example.cs
             TcpDanmakuClientV2 client = new TcpDanmakuClientV2();
             await client.ConnectAsync(5441);
             client.ReceivedPopularityEvt += Client_ReceivedPopularityEvt;
-            client.ReceivedMessageHandlerEvt += Client_ReceivedMessageHandlerEvt;
+            client.ReceivedMessageEvt += Client_ReceivedMessageHandlerEvt;
             await Task.Delay(-1);
         }
 

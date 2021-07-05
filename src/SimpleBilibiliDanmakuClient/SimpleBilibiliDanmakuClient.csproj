@@ -8,9 +8,9 @@
     <NoWarn>NETSDK1138;</NoWarn>
     <Authors>Executor</Authors>
     <Company>Executor</Company>
-    <Version>1.0.1.0</Version>
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
-    <FileVersion>1.0.1.0</FileVersion>
+    <Version>1.1.0.0</Version>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
     <Copyright>Copyright © Executor 2021</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Executor-Cheng/SimpleBilibiliDanmakuClient</PackageProjectUrl>

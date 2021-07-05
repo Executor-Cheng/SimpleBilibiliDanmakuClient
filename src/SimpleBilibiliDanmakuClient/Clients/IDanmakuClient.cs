@@ -11,7 +11,7 @@ namespace SimpleBilibiliDanmakuClient.Clients
 
         event DanmakuClientEventHandler<DisconnectedEventArgs>? DisconnectedEvt;
 
-        event DanmakuClientEventHandler<ReceivedMessageEventArgs>? ReceivedMessageHandlerEvt;
+        event DanmakuClientEventHandler<ReceivedMessageEventArgs>? ReceivedMessageEvt;
 
         event DanmakuClientEventHandler<ReceivedPopularityEventArgs>? ReceivedPopularityEvt;
 

@@ -103,7 +103,7 @@ namespace SimpleBilibiliDanmakuClient.Clients
 
         public event DanmakuClientEventHandler<DisconnectedEventArgs>? DisconnectedEvt;
 
-        public event DanmakuClientEventHandler<ReceivedMessageEventArgs>? ReceivedMessageHandlerEvt;
+        public event DanmakuClientEventHandler<ReceivedMessageEventArgs>? ReceivedMessageEvt;
 
         public event DanmakuClientEventHandler<ReceivedPopularityEventArgs>? ReceivedPopularityEvt;
 
@@ -399,7 +399,7 @@ namespace SimpleBilibiliDanmakuClient.Clients
 #else
                             JsonElement message = JsonSerializer.Deserialize<JsonElement>(new ReadOnlySpan<byte>(buffer, 0, protocol.PacketLength - 16));
 #endif
-                            InvokeEvt(ref ReceivedMessageHandlerEvt, new ReceivedMessageEventArgs(message));
+                            InvokeEvt(ref ReceivedMessageEvt, new ReceivedMessageEventArgs(message));
 
                         }
                         catch // Ignore all exceptions
