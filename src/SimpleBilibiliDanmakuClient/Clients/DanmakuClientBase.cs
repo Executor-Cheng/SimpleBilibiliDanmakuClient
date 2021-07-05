@@ -135,14 +135,14 @@ namespace SimpleBilibiliDanmakuClient.Clients
             createdToken = createdWCts.Token;
             try
             {
-                await InternalConnectAsync(roomId, createdToken);
+                await InternalConnectAsync(roomId, createdToken).ConfigureAwait(false);
 #if NET5_0_OR_GREATER
                 TaskCompletionSource tcs = new TaskCompletionSource();
 #else
                 TaskCompletionSource<int> tcs = new TaskCompletionSource<int>();
 #endif
                 ReceiveMessageAsyncLoop(tcs, createdWCts!, createdToken);
-                await tcs.Task;
+                await tcs.Task.ConfigureAwait(false);
                 _Connected = true;
                 SendHeartBeatAsyncLoop(createdWCts!, createdToken);
             }

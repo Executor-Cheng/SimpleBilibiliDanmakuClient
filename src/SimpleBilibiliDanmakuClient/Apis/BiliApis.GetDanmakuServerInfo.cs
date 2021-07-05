@@ -20,7 +20,7 @@ namespace SimpleBilibiliDanmakuClient.Apis
         public static async Task<DanmakuServerInfo> GetDanmakuServerInfoAsync(int roomId, CancellationToken token = default)
         {
 #if NETSTANDARD2_0
-            JToken root = await _client.GetAsync($"https://api.live.bilibili.com/xlive/web-room/v1/index/getDanmuInfo?id={roomId}&type=0", token).GetJsonAsync(token);
+            JToken root = await _client.GetAsync($"https://api.live.bilibili.com/xlive/web-room/v1/index/getDanmuInfo?id={roomId}&type=0", token).GetJsonAsync(token).ConfigureAwait(false);
             if (root["code"]!.ToObject<int>() == 0)
             {
                 JToken data = root["data"]!,
@@ -34,7 +34,7 @@ namespace SimpleBilibiliDanmakuClient.Apis
             }
             throw new UnknownResponseException(root);
 #else
-            using JsonDocument j = await _client.GetAsync($"https://api.live.bilibili.com/xlive/web-room/v1/index/getDanmuInfo?id={roomId}&type=0", token).GetJsonAsync(token);
+            using JsonDocument j = await _client.GetAsync($"https://api.live.bilibili.com/xlive/web-room/v1/index/getDanmuInfo?id={roomId}&type=0", token).GetJsonAsync(token).ConfigureAwait(false);
             JsonElement root = j.RootElement;
             if (root.GetProperty("code").GetInt32() == 0)
             {

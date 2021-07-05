@@ -39,7 +39,7 @@ namespace SimpleBilibiliDanmakuClient.Extensions
                 Content = content,
                 Version = DefaultHttpVersion
             };
-            return await client.SendAsync(request, token);
+            return await client.SendAsync(request, token).ConfigureAwait(false);
         }
 
 #if NET5_0_OR_GREATER

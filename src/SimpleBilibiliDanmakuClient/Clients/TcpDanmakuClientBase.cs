@@ -58,20 +58,20 @@ namespace SimpleBilibiliDanmakuClient.Clients
 
         protected override async Task InternalConnectAsync(int roomId, CancellationToken token)
         {
-            DanmakuServerInfo server = await BiliApis.GetDanmakuServerInfoAsync(roomId, token);
+            DanmakuServerInfo server = await BiliApis.GetDanmakuServerInfoAsync(roomId, token).ConfigureAwait(false);
             Socket socket = new Socket(SocketType.Stream, ProtocolType.Tcp);
             socket.SendTimeout = socket.ReceiveTimeout = (int)HeartbeatInterval.TotalMilliseconds + 10000;
             token.Register(socket.Dispose);
             DanmakuServerHostInfo serverHost = server.Hosts[(int)(Stopwatch.GetTimestamp() % server.Hosts.Length)];
 #if NET5_0_OR_GREATER
-            await socket.ConnectAsync(serverHost.Host, serverHost.Port, token);
+            await socket.ConnectAsync(serverHost.Host, serverHost.Port, token).ConfigureAwait(false);
 #else
-            await socket.ConnectAsync(serverHost.Host, serverHost.Port);
+            await socket.ConnectAsync(serverHost.Host, serverHost.Port).ConfigureAwait(false);
 #endif
 #if NETSTANDARD2_0
-            await SendJoinRoomAsync(socket, roomId, 0, server.Token);
+            await SendJoinRoomAsync(socket, roomId, 0, server.Token).ConfigureAwait(false);
 #else
-            await SendJoinRoomAsync(socket, roomId, 0, server.Token, token);
+            await SendJoinRoomAsync(socket, roomId, 0, server.Token, token).ConfigureAwait(false);
 #endif
             _Socket = socket;
         }

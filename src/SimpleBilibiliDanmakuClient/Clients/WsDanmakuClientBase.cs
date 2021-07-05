@@ -15,13 +15,13 @@ namespace SimpleBilibiliDanmakuClient.Clients
 
         protected override async Task InternalConnectAsync(int roomId, CancellationToken token)
         {
-            DanmakuServerInfo server = await BiliApis.GetDanmakuServerInfoAsync(roomId, token);
+            DanmakuServerInfo server = await BiliApis.GetDanmakuServerInfoAsync(roomId, token).ConfigureAwait(false);
             ClientWebSocket client = new ClientWebSocket();
             client.Options.KeepAliveInterval = Timeout.InfiniteTimeSpan;
             token.Register(client.Dispose);
             DanmakuServerHostInfo serverHost = server.Hosts[(int)(Stopwatch.GetTimestamp() % server.Hosts.Length)];
-            await client.ConnectAsync(new Uri($"wss://{serverHost.Host}:{serverHost.WssPort}/sub"), token);
-            await SendJoinRoomAsync(client, roomId, 0, server.Token, token);
+            await client.ConnectAsync(new Uri($"wss://{serverHost.Host}:{serverHost.WssPort}/sub"), token).ConfigureAwait(false);
+            await SendJoinRoomAsync(client, roomId, 0, server.Token, token).ConfigureAwait(false);
             _Client = client;
         }
 

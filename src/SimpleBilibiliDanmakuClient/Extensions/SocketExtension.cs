@@ -25,7 +25,7 @@ namespace SimpleBilibiliDanmakuClient.Extensions
         {
             while (true)
             {
-                int n = await socket.ReceiveAsync(memory, SocketFlags.None, token);
+                int n = await socket.ReceiveAsync(memory, SocketFlags.None, token).ConfigureAwait(false);
                 if (n < 1)
                 {
                     throw new SocketException(10054);
@@ -52,7 +52,7 @@ namespace SimpleBilibiliDanmakuClient.Extensions
             }
             while (true)
             {
-                int n = await Task.Factory.FromAsync(socket.BeginReceive(buffer, offset, size, SocketFlags.None, null, null), socket.EndReceive);
+                int n = await Task.Factory.FromAsync(socket.BeginReceive(buffer, offset, size, SocketFlags.None, null, null), socket.EndReceive).ConfigureAwait(false);
                 if (n < 1)
                 {
                     throw new SocketException(10054);
